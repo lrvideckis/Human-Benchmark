@@ -176,7 +176,7 @@ class _TypingScreenState extends State<TypingScreen> {
                                       isDarkMode ? Colors.white : Colors.black,
                                 ),
                                 keyboardType: TextInputType.multiline,
-                                maxLines: null,
+                                maxLines: 4,
                               ),
                             ],
                           ),
