@@ -18,7 +18,7 @@ class TypingScreen extends StatefulWidget {
   static Future<void> saveResults() async {
     final prefs = await SharedPreferences.getInstance();
     if (results.length > 5) {
-      results.removeLast();
+      results.removeAt(0);
     }
     final resultsStrings = results.map((e) => e.toString()).toList();
     await prefs.setStringList('typing_speed_results', resultsStrings);
