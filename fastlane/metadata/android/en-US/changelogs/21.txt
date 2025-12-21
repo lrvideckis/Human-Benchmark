@@ -1,0 +1,3 @@
+Change(s):
+- Typing Test: Fixed an issue where the 6th result was not displayed. Test texts have been improved by making them slightly longer and more challenging.
+- Statistics Sharing: Removed the default text from the message field.
