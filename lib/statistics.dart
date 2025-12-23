@@ -517,16 +517,15 @@ void _shareAllStats(BuildContext context) async {
   final stats = testConfigs.map((c) =>
       '${c.title}: ${c.average.toStringAsFixed(c.precision)} ${c.unit}'
   ).join('\n');
-  final text = 'My Human Benchmark Stats:\n\n$stats\n\nShared via Human Benchmark App';
 
   final recorder = ui.PictureRecorder();
-  final canvas = Canvas(recorder, const Rect.fromLTWH(0, 0, 500, 700));
+  final canvas = Canvas(recorder, const Rect.fromLTWH(0, 0, 450, 520));
   final paint = Paint()..color = Colors.white;
-  canvas.drawRect(const Rect.fromLTWH(0, 0, 500, 700), paint);
+  canvas.drawRect(const Rect.fromLTWH(0, 0, 450, 520), paint);
 
   final titlePainter = TextPainter(textDirection: TextDirection.ltr);
   titlePainter.text = const TextSpan(
-    text: 'Human Benchmark Stats',
+    text: 'My Statistics',
     style: TextStyle(color: Colors.black, fontSize: 36, fontWeight: FontWeight.bold),
   );
   titlePainter.layout();
@@ -543,26 +542,26 @@ void _shareAllStats(BuildContext context) async {
     canvas.drawImageRect(
       image,
       Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
-      const Rect.fromLTWH(20, 600, 60, 60),
+      const Rect.fromLTWH(20, 415, 60, 60),
       Paint(),
     );
     final wmText = TextPainter(textDirection: TextDirection.ltr);
-    wmText.text = const TextSpan(text: 'Human Benchmark', style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold));
+    wmText.text = const TextSpan(text: 'Human Benchmark', style: TextStyle(color: Colors.black, fontSize: 28, fontWeight: FontWeight.bold));
     wmText.layout();
-    wmText.paint(canvas, const Offset(90, 620));
+    wmText.paint(canvas, const Offset(90, 430));
   } catch (_) {
     // Ignore if asset missing
   }
 
   final picture = recorder.endRecording();
-  final img = await picture.toImage(500, 700);
+  final img = await picture.toImage(450, 520);
   final png = await img.toByteData(format: ui.ImageByteFormat.png);
   final bytes = png!.buffer.asUint8List();
 
   final dir = await getTemporaryDirectory();
   final file = File('${dir.path}/stats.png')..writeAsBytesSync(bytes);
 
-  Share.shareXFiles([XFile(file.path)], text: text);
+  Share.shareXFiles([XFile(file.path)]);
 }
 
 void _confirmDelete(BuildContext context, VoidCallback onRefresh) {
